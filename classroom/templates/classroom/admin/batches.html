@@ -1,0 +1,23 @@
+{% extends 'base_admin.html' %}
+
+{% block content %}
+<h1 class="mb-3">Batches</h1>
+  <div class="card">
+    <table class="table mb-0">
+      <thead>
+        <tr>
+          <th>Batch</th>
+          <th>Students</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for batch,students in query_object.items %}
+          <tr>
+           <td class="align-middle">{{ batch.name }}</a></td>
+           <td class="align-middle">{{ students }}</a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

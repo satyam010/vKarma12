@@ -1,0 +1,23 @@
+Operations to perform:
+  Synchronize unmigrated apps: bootstrap4, bootstrap_datepicker_plus, classroom, crispy_forms, humanize, messages, staticfiles
+  Apply all migrations: auth, contenttypes, sessions
+Synchronizing apps without migrations:
+  Creating tables...
+    Creating table classroom_user
+    Creating table classroom_admin
+    Creating table classroom_subject
+    Creating table classroom_batch
+    Creating table classroom_student
+    Creating table classroom_parent
+    Creating table classroom_teacher
+    Creating table classroom_homework
+    Creating table classroom_notification
+    Creating table classroom_attendance
+    Creating table classroom_test
+    Creating table classroom_marks
+    Creating table classroom_timetable
+    Creating table classroom_remark
+    Creating table classroom_request
+    Running deferred SQL...
+Running migrations:
+  No migrations to apply.

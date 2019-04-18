@@ -1,0 +1,10 @@
+{% extends 'base_student.html' %}
+{% include 'classroom/students/_header.html' with active='new' %}
+{% block content %}
+  <p class="lead">Select The test you want to check marks for</p>
+  {% for test in tests %}
+  <a href="{% url 'students:compare' subject=subject.name test=test.name %}" class="btn btn-primary mb-3" role="button"">
+  	{{test.name}}
+  </a>
+  {% endfor %}
+{% endblock %}

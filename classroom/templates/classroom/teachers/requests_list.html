@@ -1,0 +1,52 @@
+{% extends 'base_teacher.html' %}
+
+{% block content %}
+
+
+  <h2 class="mb-3">Request list</h2>
+  <div class="card">
+    <table class="table mb-0">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Noted</th>
+          {% if user.is_admin %}
+          <th>From</th>
+          {% endif %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for request in requests %}
+
+          <tr>
+           <td class="align-middle">
+            {{request.title}}</td>
+           <td class="align-middle">{{request.description}}</td>
+           <td class="align-middle">{% if request.noted %}
+              <p>&#9989;</p>
+              {% else %}
+              <p>&#10060;</p>
+              {% endif %}</td> 
+            {% if user.is_admin %}
+              <td class="align-middle">{{request.owner.firstName}} {{request.owner.lastName}}</td>
+            {% endif %}
+          </tr>
+          {% empty %}
+          <tr>
+            <td class="bg-light text-center font-italic" colspan="5">No Requests yet !</td>
+          </tr>
+        {% endfor %}
+        {% if user.is_teacher %}
+        <tr><a href="{% url 'teachers:request_create' %}" class="btn btn-outline-success" role="button">Create Request</a></tr>
+        {% endif %}
+        {% if user.is_student %}
+        <tr><a href="{% url 'students:request_create' %}" class="btn btn-outline-success" role="button">Create Request</a></tr>
+        {% endif %}
+        {% if user.is_parent %}
+        <tr><a href="{% url 'students:request_create' %}" class="btn btn-outline-success" role="button">Create Request</a></tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

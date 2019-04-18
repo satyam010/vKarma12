@@ -1,0 +1,39 @@
+{% extends 'base_admin.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  
+  <h2 class="mb-3" align="center">Create a new notification</h2>
+  <div class="row">
+    <div class="col-md-6 col-sm-8 col-12 form-container" align ="center">
+      <form method="post" novalidate enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-success">Save</button>
+        <a href="{% url 'teachers:teacher_home' %}" class="btn btn-outline-secondary" role="button">Go Back</a>
+      </form>
+    </div>
+  </div>
+<style>
+  @media(min-width:800px){
+    .form-container{
+    margin-left : 14em;
+    }
+}
+@media(max-width:740px){
+    .form-container{
+    margin-left : 7em;
+    }
+}
+@media(max-width:740px){
+    .form-container{
+    margin-left : 7em;
+    }
+}
+@media(max-width:560px){
+    .form-container{
+    margin-left : 0em;
+    }
+}
+</style>
+{% endblock %}

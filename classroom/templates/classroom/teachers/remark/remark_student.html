@@ -1,0 +1,42 @@
+{% extends 'base_teacher.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'home' %}">Teacher Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'teachers:teacher_remark' %}">Remarks</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'teachers:remark_batch' %}">Remarks Batches</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Remarks Students</li>
+    </ol>
+  </nav>
+  
+  <div class="card">
+    <table class="table mb-0">
+      <thead>
+        <tr>
+          <th>Students</th>
+          <th>Create Remarks</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for student in students %}
+          <tr>
+           <td class="align-middle"><a href="#">{{ student.user.firstName }} {{student.user.lastName}}</a></td>
+           <td class="align-middle">
+            <a href="{% url 'teachers:remark_create' batch=batch student_id=student.user.username %}"
+            class="att-btn btn btn-primary" role="button">
+              Create Remark
+            </button>
+           </td> 
+          </tr>
+          {% empty %}
+          <tr>
+            <td class="bg-light text-center font-italic" colspan="5">No Students to judge !</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

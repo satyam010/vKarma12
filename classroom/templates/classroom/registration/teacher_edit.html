@@ -1,0 +1,11 @@
+{% extends "base_admin.html" %}
+{% load bootstrap4 %}
+{% block content %}
+<form method="POST" enctype="multipart/form-data" >
+  {% csrf_token %}
+  {% bootstrap_form edit_form %}
+  {% bootstrap_form edit_form_two %}
+  <button type="submit" class="btn btn-default">Save changes</button>
+  <a type="button" href="{% url 'admin:admin_home' %}" class="btn btn-outline-warning">Cancel</a>
+</form>
+{% endblock %}

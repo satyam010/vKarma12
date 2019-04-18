@@ -1,0 +1,27 @@
+{% extends 'base_parent.html' %}
+
+{% block content %}
+  <h2>Child's Marks</h2>
+  <div class="card">
+    <table class="table mb-0">
+      <thead>
+        <tr>
+          <th>Marks scored</th>
+          <th>Subject</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for m in marks %}
+          <tr>
+            <td class="align-middle"><a href="{% url 'students:chart' m.Scored_marks %}">{{ m.Scored_marks }}</a></td>
+        {% endfor %}
+        {% for t in tests %}
+          <td class="align-middle">{{ t.subject }}</td>
+          <td class="align-middle">{{ t.Total_marks }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "base_admin.html" %}
+{% load bootstrap4 %}
+{% block content %}
+<form method="POST" enctype="multipart/form-data" novalidate>
+  {% csrf_token %}
+  {% bootstrap_form secondary_form %}
+  {% bootstrap_form main_form %}
+  <button type="submit" class="btn btn-default">Save changes</button>
+</form>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base_teacher.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'teachers:requests' %}">Requests</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Requests</li>
+    </ol>
+  </nav>
+  
+  <div class="row">
+    <div class="col-md-6 col-sm-8 col-12">
+      <form method="post" novalidate>
+        {% csrf_token %}
+        {{ form|crispy }} 
+        <button type="submit" class="btn btn-success">Send Request</button>
+        <a href="{% url 'teachers:requests' %}" class="btn btn-outline-secondary" role="button">Nevermind</a>
+      </form>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,114 @@
+{% extends 'base_parent.html' %}
+
+{% block content %}
+  
+  {% for s in parent %}
+  <div class="content">
+    <div class="col-md-12">
+                        <div >
+                            <div >
+                                <center>
+                                    <img 
+                                    style=
+                                    "border-radius: 50%;
+                                    background-colour:red;
+                                    height: 180px;
+                                    width: 180px;
+                                    margin-right: 20px;
+                                    margin-bottom: 16px;
+
+                                    " 
+                                    src="https://s3.amazonaws.com/codechef_shared/sites/default/files/uploads/pictures/882b0bfaceadde5ba223b52b7422d06c.jpg" alt="..."/>
+                                </center>
+                            </div>
+                            
+                            
+                            
+                        </div>
+                    </div>
+            
+            <center>
+            <div >
+                <div class="row">
+                    <div class="col-md-10">
+
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Profile</h4>
+                            </div>
+                            
+          
+                            
+                            <div class="content">
+
+                                 <center>
+                                <form>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>My name</label>
+                                                <input type="text" class="form-control" disabled placeholder="My name" value="{{s}}">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Child's Name</label>
+                                                <input type="text" class="form-control" disabled placeholder="Child's Name" value="{{s.child}}">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>My Email Address</label>
+                                                <input type="text" class="form-control" disabled  placeholder="Email" value="{{s.email}}">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Child's Email Address</label>
+                                                <input type="email" class="form-control" disabled placeholder="Email" value="{{s.child.email}}">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>My Phone Number</label>
+                                                <input type="text" class="form-control" disabled  placeholder="Phone Number" value="{{s.phone_number}}">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Child's Phone Number</label>
+                                                <input type="email" class="form-control" disabled placeholder="Phone Number" value="{{s.child.phone_number}}">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    
+
+                                    
+
+                                    
+                                    <div class="clearfix"></div>
+                                </form>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                </div>
+            </div>
+            <center>
+        </div>
+  {% endfor %}
+
+{% endblock %}

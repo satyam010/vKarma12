@@ -1,0 +1,10 @@
+{% extends 'base_teacher.html' %}
+
+{% block content %}
+  <p class="lead">Select The subject you want to mark attendance for</p>
+  {% for subject in subjects %}
+  <a href="{% url 'teachers:attendance' batch=batch subject=subject.name %}" class="btn  btn-lg" role="button" style="background:{{subject.color}};color:white;">
+  	{{subject.name}}
+  </a>
+  {% endfor %}
+{% endblock %}

@@ -1,0 +1,166 @@
+{% extends 'base_admin.html' %}
+
+{% block content %}
+  <h1 class="mb-3" align="center">Details</h1>
+  <div class="card">
+    <table class="table mb-0">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Roll Number</th>
+          <th>User type</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for student in students %}
+        <div class="modal fade" id="myModal-{{student.user.username}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title" id="myModalLabel">Student</h4>
+                    </div>
+                <div class="modal-body">
+                    <center>
+                      {% if student.image %}
+                    <img src="{{student.image.url}}" name="aboutme" width="140" height="140" border="0" class="img-circle">
+                      {% endif %}
+                
+                    <h3 class="media-heading">{{student.user.firstName}} {{student.user.lastName}}</h3>
+                    <small style="font-weight:10;">{{student.batch.name}}</small><hr>
+                    </center>
+                    <p><b>Email address :</b> {{student.email}}</p>
+                    <p><b>Phone number : </b> {{student.phone_number}}</p>
+                    <p><b>Date of birth : </b>{{student.dob}}</p>
+                    <p><b>Home address : </b>{{student.address}}</p>
+                    <p><b>Age : </b>{{student.age}}</p>
+                </div>
+                <div class="modal-footer">
+                    <center>
+                      <a type="button" class="btn btn-outline-danger" href="{% url 'students:student_edit' username=student.user.username %}">Edit</a>
+                    <button type="button" class="btn btn-outline-warning" data-dismiss="modal">Close</button>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>        
+        {% endfor %}
+        {% for parent in parents %}
+        <div class="modal fade" id="myModal-{{parent.user.username}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title" id="myModalLabel">Parent</h4>
+                    </div>
+                <div class="modal-body">
+                    <center>
+                    {% if parent.image %}
+                      <img src="{{parent.image.url}}" name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
+                    {% endif %}
+                    <h3 class="media-heading">{{parent.user.firstName}} {{parent.user.lastName}}</h3>
+                    <hr>
+                    </center>
+                    <p><b>Email address :</b> {{parent.email}}</p>
+                    <p><b>Phone number : </b> {{parent.phone_number}}</p>
+                    <p><b>Home address : </b>{{parent.address}}</p>
+                    <p><b>Child : </b>{{parent.child.user.firstName}} {{parent.child.user.lastName}}</p>
+                </div>
+                <div class="modal-footer">
+                    <center>
+                    <a type="button" class="btn btn-outline-danger" href="{% url 'parents:parent_edit' username=parent.user.username %}">Edit</a>
+                    <button type="button" class="btn btn-outline-warning" data-dismiss="modal">Close</button>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        {% endfor %}
+        {% for teacher in teachers %}
+        <div class="modal fade" id="myModal-{{teacher.user.username}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title" id="myModalLabel">Teacher</h4>
+                    </div>
+                <div class="modal-body">
+                    <center>
+                      {% if teacher.image %}
+                    <img src="{{teacher.image.url}}" name="aboutme" width="140" height="140" border="0" class="img-circle">
+                      {% endif %}
+                    </a>
+                    <h3 class="media-heading">{{teacher.user.firstName}} {{teacher.user.lastName}}</h3>
+                    <hr>
+                    </center>
+                    <p><b>Email address :</b> {{teacher.email}}</p>
+                    <p><b>Phone number : </b> {{teacher.phone_number}}</p>
+                    <p><b>Batches : </b> | {% for batch in teacher.batch.all %} {{batch}} |{% endfor %}</p>
+                </div>
+                <div class="modal-footer">
+                    <center>
+                    <a type="button" class="btn btn-outline-danger" href="{% url 'teachers:teacher_edit' username=teacher.user.username %}">Edit</a>
+                    <button type="button" class="btn btn-outline-warning" data-dismiss="modal">Close</button>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        {% endfor %}
+        {% for user in users_normal %}
+          <tr>
+                <td class="align-middle"><a href="#aboutModal" data-toggle="modal" data-target="#myModal-{{user.username}}">{{ user.firstName }} {{ user.lastName }}</a></td>
+                <td class="align-middle">{{ user.username }}</td>
+                {% if user.is_student %}
+                <td class="align-middle">Student</td>
+                {% elif user.is_parent %}
+                <td class="align-middle">Parent</td>
+                {% elif user.is_teacher %}
+                <td class="align-middle">Teacher</td>
+                {% endif %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    
+{% if is_paginated %}
+  <ul class="pagination">
+      <h3>
+    {% if page_obj.has_previous %}
+      <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    </h3>
+    {% for i in page_range %}
+      <h3>
+      {% if page_obj.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+      </h3>
+    {% endfor %}
+    <h3>
+    {% if page_obj.has_next and i < max_page %}
+    <h1>{{i}}</h1>
+      <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+    </h3>
+  </ul>
+{% else %}
+{% endif %}
+  </div>
+  <style>
+    .pagination {
+      margin-top:10vh;
+      margin-left:5vw;
+    }
+
+  </style>
+{% endblock %}

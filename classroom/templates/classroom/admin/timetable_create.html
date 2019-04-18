@@ -1,0 +1,33 @@
+{% extends 'base_admin.html' %}
+
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<script src="http://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/src/js/bootstrap-datetimepicker.js"></script>
+
+
+<link href="http://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/build/css/bootstrap-datetimepicker.css" rel="stylesheet"/>
+
+  
+
+    <div class="col-md-6 col-sm-8 col-12" align = "center"style="margin-left:14em">
+      {{ form.media }}
+      <form method="post">
+      {% csrf_token %}
+      {% bootstrap_form form %}
+    <input type="submit" value="Create" class="btn btn-primary">
+    <a href="{% url 'admin:timetable' %}" class="btn btn-outline-warning" role="button">Nevermind</a>
+    </form>
+    </div>
+  </div>
+
+{% endblock %}

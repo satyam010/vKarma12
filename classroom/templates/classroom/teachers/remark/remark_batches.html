@@ -1,0 +1,31 @@
+{% extends 'base_teacher.html' %}
+
+{% block content %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'home' %}">Teacher Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'teachers:teacher_remark' %}">Remarks</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Remarks Batches</li>
+    </ol>
+  </nav>
+  
+  <h2 class="mb-3">Select Batch</h2>
+  <div class="card">
+    <table class="table mb-0">
+      <thead>
+        <tr>
+          <th>Batches</th>
+          <th>Students</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for batch,students in batches.items %}
+          <tr>
+           <td class="align-middle"><a href="{% url 'teachers:remark_student' batch=batch.name %}">{{ batch.name }}</a></td>
+           <td class="align-middle"><a href="{% url 'teachers:remark_student' batch=batch.name %}">{{ students }}</a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

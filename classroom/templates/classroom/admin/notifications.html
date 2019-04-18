@@ -1,0 +1,49 @@
+{% extends 'base_admin.html' %}
+{% block content %}
+<h1 class="mb-3">Notifications list</h1>
+    <table class="table mb-0">
+      <thead>
+        <tr>
+          <th>Notification</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for n in notification %}
+        <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">{{n.name}}</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              {{n.description}}
+            </div>
+            <div class="modal-footer">
+              {% if n.file %}
+                <a href="{{ n.file.url }}">Download Attached file</a>
+              {% endif %}
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+      </div>
+    </div>
+          <tr>
+            <td class="align-middle"><button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#myModal">
+            {{ n.name | truncatechars:25}}
+            </button>
+            </td>
+            <td class="align-middle">
+              {{ n.description |truncatechars:40}}
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td class="bg-light text-center font-italic" colspan="5">You don't have any notification.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base_teacher.html' %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'teachers:teacher_home' %}">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Tests</li>
+    </ol>
+  </nav>
+  
+  <div class="card">
+    <table class="table mb-0">
+      <thead>
+        <tr>
+          <th>Test id</th>
+          <th>Subject</th>
+          <th>Name</th>
+          <th>Mark Students</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><a href="{% url 'teachers:create_test' %}" class="btn btn-outline-success" role="button">Create Test</a></tr>
+        {% for test in tests %}
+          <tr>
+            <td class="align-middle">
+            {{ test.test_id }}
+            </td>
+            <td class="align-middle">
+              {{ test.subject.get_html_badge }}
+            </td>
+            <td class="align-middle">
+              {{ test.name }}
+            </td>
+            <td class="align-middle">
+              <a href="{% url 'teachers:marks_batches' test=test.test_id %}" class="btn btn-outline-success" role="button">Mark Students</a>
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td class="bg-light text-center font-italic" colspan="5">You don't have any tests.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'base_teacher.html' %}
+
+{% block content %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Remarks</li>
+    </ol>
+  </nav>
+  
+  <h2 class="mb-3">Remark list</h2>
+  <div class="card">
+    <table class="table mb-0">
+      <thead>
+        <tr>
+          <th>Students</th>
+          <th>Title</th>
+          <th>Remarks</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for remark in remarks %}
+        <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">{{remark.title}}</h4> 
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              To <b>
+              {{ remark.student.user.firstName }} {{remark.student.user.lastName}}</b><br><br>
+              {{remark.description}}
+              <br><br>
+              From <b>{{remark.teacher.user.firstName}} {{remark.teacher.user.lastName}}</b>
+            </div>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+      </div>
+    </div>
+          <tr>
+
+           <td class="align-middle">
+            <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#myModal">{{ remark.student.user.firstName }} {{remark.student.user.lastName}}</button></td>
+           <td class="align-middle"> {{remark.title}} </td>
+           <td class="align-middle">{{remark.description | truncatechars:50}}</td> 
+          </tr>
+          {% empty %}
+          <tr>
+            <td class="bg-light text-center font-italic" colspan="5">No Remarks yet !</td>
+          </tr>
+        {% endfor %}
+        {% if user.is_teacher %}
+        <tr><a href="{% url 'teachers:remark_batch' %}" class="btn btn-outline-success" role="button">Create Remark</a></tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

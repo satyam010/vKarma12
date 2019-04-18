@@ -1,0 +1,96 @@
+{% extends 'base_teacher.html' %}
+
+{% block content %}
+  
+  {% for s in teacher %}
+  <div class="content">
+    <div class="col-md-12">
+                        <div >
+                            <div >
+                                <center>
+                                    <img 
+                                    style=
+                                    "border-radius: 50%;
+                                    height: 180px;
+                                    width: 180px;
+                                    margin-right: 20px;
+                                    margin-bottom: 16px;
+                                    " 
+                                    src="https://s3.amazonaws.com/codechef_shared/sites/default/files/uploads/pictures/882b0bfaceadde5ba223b52b7422d06c.jpg" alt="..."/>
+                                </center>
+                            </div>
+                            
+                            
+                            
+                        </div>
+                    </div>
+            
+            <center>
+            <div >
+                <div class="row">
+                    <div class="col-md-10">
+
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Profile</h4>
+                            </div>
+                            
+          
+                            
+                            <div class="content">
+
+                                 <center>
+                                <form>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>My name</label>
+                                                <input type="text" class="form-control" disabled placeholder="My name" value="{{s}}">
+                                            </div>
+                                        </div>
+                                        
+                                      
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>My Email Address</label>
+                                                <input type="text" class="form-control" disabled  placeholder="Email Address" value="{{s.email}}">
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>My Phone Number</label>
+                                                <input type="text" class="form-control" disabled  placeholder="Phone Number" value="{{s.phone_number}}">
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+
+                                    
+
+                                    
+
+                                    
+                                    <div class="clearfix"></div>
+                                </form>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                </div>
+            </div>
+            <center>
+        </div>
+  {% endfor %}
+
+{% endblock %}

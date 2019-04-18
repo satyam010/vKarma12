@@ -1,0 +1,39 @@
+{% extends 'base_admin.html' %}
+
+{% block content %}
+
+  <h2 class="mb-3">Future Classes</h2>
+  <div class="card">
+    <table class="table mb-0">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Batch</th>
+          <th>Subject</th>
+          <th>Teacher</th>
+          <th>Duration</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for schedule in timetable %}
+
+          <tr>
+           <td class="align-middle">
+            {{schedule.start_time}}</td>
+           <td class="align-middle"><h4>{{schedule.subject.get_html_badge}}</h4></td>
+           <td class="align-middle">{{schedule.batch}}</td>
+           <td class="align-middle">{{schedule.teacher}}</td>
+           <td class="align-middle">{{schedule.class_duration}} hours</td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td class="bg-light text-center font-italic" colspan="5">No Schedule yet !</td>
+          </tr>
+        {% endfor %}
+        {% if user.is_admin %}
+        <tr><a href="{% url 'admin:timetable_create' %}" class="btn btn-outline-success" role="button">Create Schedule</a></tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

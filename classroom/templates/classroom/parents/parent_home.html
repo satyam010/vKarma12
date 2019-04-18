@@ -1,0 +1,62 @@
+{% extends "base_parent.html" %}
+{% block content %}
+ 
+ <div class="card">
+    <table class="table mb-0">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Subject</th>
+          <th>Description</th>
+          <th>Deadline</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for hw in p.child.homework %}
+          <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">{{hw.name}}</h4>
+              <h4 style="padding-left:10px" class="modal-subtitle">{{hw.subject.get_html_badge}}</h4>
+
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+              <p><b>Posted by {{hw.owner.firstName}} {{hw.owner.lastName}}</b>,</p>
+              {{hw.description}} <br><br>
+              <span>Posted on : {{hw.issue_date}}</span>
+              <p>Deadline : {{hw.deadline}}</p>
+            </div>
+            <div class="modal-footer">
+              {% if hw.file %}
+                <a href="{{ hw.file.url }}">Download Attached File</a>
+                {% endif %}
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+      </div>
+    </div>
+          <tr>
+            <td class="align-middle">
+              <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#myModal">
+              {{ hw.name |truncatechars:15}}
+              </button>
+            </td>
+            <td class="align-middle">{{ hw.subject.get_html_badge }}</td>
+            <td class="align-middle">{{ hw.description |truncatechars:25 }}</td>
+            <td class="align-middle">{{ hw.deadline }}</td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td class="bg-light text-center font-italic" colspan="5">You don't have any homeworks.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+  </div>
+
+{% endblock %}
